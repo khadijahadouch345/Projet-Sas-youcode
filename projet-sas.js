@@ -208,6 +208,40 @@ for(let i=0;i<trips.length;i++){
 }
 }
 //acheter un ticket 
+function acheterTicket (){
+
+     let nomPassager=prompt("Entre le Nom du passager:")
+     let  identifiantTrajet=Number(prompt("Identifiant du trajet: "));
+     let trouvee = false;
+     for( let i=0;i<trips.length;i++){
+        if(identifiantTrajet == trips[i].id){
+            trouvee = true;
+            console.log("Le trajet existe");
+            
+            if(trips[i].availableSeats!==0){
+                console.log("Il reste des places disponibles.")
+                break;
+
+
+            }else{
+                console.log("Il ne reste aucune place disponible.");
+                break;
+            }
+        }
+        
+     }
+
+     if(trouvee == false)
+     {
+        console.log("Le trajet nest existepas");
+
+
+     }
+
+
+
+
+}
 let choix;
 do{
     menuPrincipal();
@@ -217,6 +251,7 @@ do{
                  afficherTrajets() ;
             break;
          case '2':
+            acheterTicket();
           break;
          case '3':
           break;
