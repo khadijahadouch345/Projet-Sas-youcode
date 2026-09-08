@@ -1,4 +1,5 @@
 const prompt = require('prompt-sync')();
+//Menu principal
 function menuPrincipal(){
     console.log(`===============================`);
     console.log(`\tRAILWAY MANAGER`);
@@ -12,6 +13,7 @@ function menuPrincipal(){
     console.log(`7. Trier les trajets `);
     console.log(`0. Quitter `);
 }
+//les trajets
 const trips = [
     {
         id: 1,
@@ -194,13 +196,25 @@ const trips = [
         availableSeats: 50
     }
 ];
-
+//Afficher les trajets
+function afficherTrajets(){
+     console.log (`========Trajets Disponibles=========`);
+for(let i=0;i<trips.length;i++){
+    console.log(`# ${trips[i].id} ${trips[i].departure}--->${trips[i].destination}`);
+    console.log(`Départ:${trips[i].departureTime}`);
+    console.log(`Arrivée:${trips[i].arrivalTime}`);
+    console.log(`Prix:${trips[i].price} DH`);
+    console.log(`Places disponibles :${trips[i].availableSeats}\n `);
+}
+}
+//acheter un ticket 
 let choix;
 do{
     menuPrincipal();
     choix=prompt(`Votre choix:`);
      switch(choix){
         case '1':
+                 afficherTrajets() ;
             break;
          case '2':
           break;
