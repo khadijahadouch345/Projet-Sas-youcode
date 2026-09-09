@@ -288,6 +288,29 @@ function annulerTicket(){
  }
 
 }
+function afficherUnTicket(ticket)
+{
+            console.log(`Ticket#${ticket.id}`);
+            console.log(`Passager:${ticket.passengerName}`);
+       
+            for(let j=0;j <trips.length;j++){
+                if(ticket.tripId==trips[j].id){
+                    console.log(`Trajet:${trips[j].departure}--->${trips[j].destination}`);
+                    break;
+                }
+            }
+            console.log(`Place:${ticket.seatNumber}`);
+            console.log(`Prix:${ticket.price}DH`);
+}
+function rechercheTicket(){
+    let nomPas=prompt("entre la nomde passager:")
+    for(let i=0 ; i<tickets.length;i++){
+        if(tickets[i].passengerName== nomPas){
+            afficherUnTicket(tickets[i]);
+          
+        }
+    }
+}
 let choix;
 do{
     menuPrincipal();
@@ -306,6 +329,7 @@ do{
             annulerTicket();
           break;
          case '5':
+            rechercheTicket();
           break;
          case '6':
           break;
