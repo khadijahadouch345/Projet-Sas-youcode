@@ -11,6 +11,7 @@ function menuPrincipal(){
     console.log(`5. Rechercher un ticket `);
     console.log(`6. Filtrer les trajets `);
     console.log(`7. Trier les trajets `);
+    console.log(`8. Bonus — Statistiques `);
     console.log(`0. Quitter `);
 }
 //les trajets
@@ -201,11 +202,13 @@ const tickets=[];
 function afficherTrajets(){
      console.log (`========Trajets Disponibles=========`);
 for(let i=0;i<trips.length;i++){
+    if(trips[i].availableSeats !== 0){
     console.log(`# ${trips[i].id} ${trips[i].departure}--->${trips[i].destination}`);
     console.log(`Départ:${trips[i].departureTime}`);
     console.log(`Arrivée:${trips[i].arrivalTime}`);
     console.log(`Prix:${trips[i].price} DH`);
     console.log(`Places disponibles :${trips[i].availableSeats}\n `);
+}
 }
 }
 //acheter un ticket 
@@ -223,14 +226,15 @@ function acheterTicket (){
             
             if(trips[i].availableSeats!==0){
                 console.log("Il reste des places disponibles.")
-                     let ticket={
-                         id:++idUnique,
-                         passengerName:nomPassager,
-                         tripId:trips[i].id,
-                         seatNumber:trips[i].availableSeats--,
-                         price:trips[i].price
-                          };
-                    tickets.push(ticket);
+                trips[i].availableSeats --;
+                let ticket={
+                    id:++idUnique,
+                    passengerName:nomPassager,
+                    tripId:trips[i].id,
+                    seatNumber:50 - trips[i].availableSeats ,
+                    price:trips[i].price
+                };
+                tickets.push(ticket);
                 break;
 
 
@@ -250,23 +254,25 @@ function acheterTicket (){
 
 
 function afficherTickets(){
-        console.log("===TICKETS===");
+        console.log("\t========TICKETS========");
+        console.log("*************************")
     if(tickets.length>0){
         for(let i=0;i<tickets.length;i++){
-            console.log(`Ticket#${tickets[i].id}`);
-            console.log(`Passager:${tickets[i].passengerName}`);
+            console.log(`\tTicket#${tickets[i].id}`);
+            console.log(`\tPassager:${tickets[i].passengerName}`);
        
             for(let j=0;j <trips.length;j++){
                 if(tickets[i].tripId==trips[j].id){
-                    console.log(`Trajet:${trips[j].departure}--->${trips[j].destination}`);
+                    console.log(`\tTrajet:${trips[j].departure}--->${trips[j].destination}`);
                     break;
                 }
             }
     
-            console.log(`Place:${tickets[i].seatNumber}`);
-            console.log(`Prix:${tickets[i].price}DH`);
-
+            console.log(`\tPlace:${tickets[i].seatNumber}`);
+            console.log(`\tPrix:${tickets[i].price}DH\n`);
+            console.log("*************************\n");
             } 
+             
     }else{
         console.log("Aucun ticket enregistré. ");
     }
@@ -278,7 +284,8 @@ function annulerTicket(){
  for(let i=0; i<tickets.length;i++ ){
     if(saisitIdTicket==tickets[i].id){
         ticketIntrovable=true;
-        trips[tickets[i].tripId-1].availableSeats++;
+        // trips[tickets[i].tripId-1].availableSeats++;
+        trips[i].availableSeats++
         tickets.splice(i,1);
         console.log("Ticket annulé avec succès. ");
     }
@@ -307,22 +314,20 @@ function rechercheTicket(){
     for(let i=0 ; i<tickets.length;i++){
         if(tickets[i].passengerName== nomPas){
             afficherUnTicket(tickets[i]);
-          
         }
     }
 }
 function filtrerTrajets(){
-let villeDep=prompt("Ville de depart:");
+let villeDep=prompt("Ville de depart:").toLowerCase();
 console.log("Résultat : ");
 for(let i=0;i<trips.length;i++){
-    if(trips[i].departure==villeDep){
+    if(trips[i].departure.toLowerCase()==villeDep){
         console.log(`${trips[i].departure}--->${trips[i].destination} :${trips[i].price}DH`);
     }
 }
 }
 function trierTrajets(){
     let rest=0;
-    let triee = [...trips]
     for(let i=0; i<trips.length;i++){
         for(let j=0;j<trips.length-1;j++){
             if(trips[j].price>trips[j+1].price){
@@ -351,7 +356,10 @@ function statistiques(){
            }
            console.log(`Chiffre d'affaires total:${sommer} DH `);
     console.log("========Trajet le plus vendu ========");
-    
+    for(let i=0;i<trips.length;i++){
+        //if(trips[i].availableSeats>)
+    }
+
 
 }
 let choix;
