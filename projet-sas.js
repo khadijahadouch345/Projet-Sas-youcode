@@ -337,6 +337,23 @@ function trierTrajets(){
 
     }
 }
+function statistiques(){
+    console.log("========Nombre total de tickets vendus========");
+    if(tickets.length!==0){
+    console.log(`Nombre total de tickets:${tickets.length}`)
+    }else{
+        console.log(`Aucun ticket vendu pour le moment.`)
+    }
+    console.log("========Chiffre d'affaires total ========");
+            let sommer=0;
+           for (let i=0 ;i<tickets.length;i++){
+                  sommer+=tickets[i].price;
+           }
+           console.log(`Chiffre d'affaires total:${sommer} DH `);
+    console.log("========Trajet le plus vendu ========");
+    
+
+}
 let choix;
 do{
     menuPrincipal();
@@ -363,6 +380,9 @@ do{
         case '7':
             trierTrajets();
           break;
+        case `8`:
+            statistiques();
+            break;
           default:
           console.log(`Choix invalide`);
 
