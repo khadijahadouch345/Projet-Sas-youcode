@@ -311,6 +311,15 @@ function rechercheTicket(){
         }
     }
 }
+function filtrerTrajets(){
+let villeDep=prompt("Ville de depart:");
+console.log("Résultat : ");
+for(let i=0;i<trips.length;i++){
+    if(trips[i].departure==villeDep){
+        console.log(`${trips[i].departure}--->${trips[i].destination} :${trips[i].price}DH`);
+    }
+}
+}
 let choix;
 do{
     menuPrincipal();
@@ -332,6 +341,7 @@ do{
             rechercheTicket();
           break;
          case '6':
+            filtrerTrajets();
           break;
         case '7':
           break;
