@@ -320,6 +320,23 @@ for(let i=0;i<trips.length;i++){
     }
 }
 }
+function trierTrajets(){
+    let rest=0;
+    let triee = [...trips]
+    for(let i=0; i<trips.length;i++){
+        for(let j=0;j<trips.length-1;j++){
+            if(trips[j].price>trips[j+1].price){
+            rest=trips[j];
+            trips[j]=trips[j+1];
+            trips[j+1]=rest;
+            }
+        }
+    }
+    for(let i=0;i<trips.length;i++){
+        console.log(`${trips[i].departure}--->${trips[i].destination} :${trips[i].price}DH`);
+
+    }
+}
 let choix;
 do{
     menuPrincipal();
@@ -344,6 +361,7 @@ do{
             filtrerTrajets();
           break;
         case '7':
+            trierTrajets();
           break;
           default:
           console.log(`Choix invalide`);
