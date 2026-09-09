@@ -231,8 +231,6 @@ function acheterTicket (){
                          price:trips[i].price
                           };
                     tickets.push(ticket);
-                    
-                     console.log(tickets);
                 break;
 
 
@@ -253,16 +251,25 @@ function acheterTicket (){
 
     function afficherTickets(){
         console.log("===TICKETS===");
+    if(tickets.length>0){
         for(let i=0;i<tickets.length;i++){
-        console.log(`Ticket#${tickets.id}`);
-        console.log(`Passager:${}`);
-        console.log(`Trajet:${}`);
-        console.log(`Place:${}`);
-        console.log(`Prix:${}DH`);
+            console.log(`Ticket#${tickets[i].id}`);
+            console.log(`Passager:${tickets[i].passengerName}`);
        
-        
+            for(let j=0;j <trips.length;j++){
+                if(tickets[i].tripId==trips[j].id){
+                    console.log(`Trajet:${trips[j].departure}--->${trips[j].destination}`);
+                    break;
+                }
+            }
+    
+            console.log(`Place:${tickets[i].seatNumber}`);
+            console.log(`Prix:${tickets[i].price}DH`);
 
-        }
+            } 
+    }else{
+        console.log("Aucun ticket enregistré. ");
+    }
 
     }
 let choix;
