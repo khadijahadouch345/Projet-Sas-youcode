@@ -249,7 +249,7 @@ function acheterTicket (){
     }
 
 
-    function afficherTickets(){
+function afficherTickets(){
         console.log("===TICKETS===");
     if(tickets.length>0){
         for(let i=0;i<tickets.length;i++){
@@ -272,6 +272,22 @@ function acheterTicket (){
     }
 
     }
+function annulerTicket(){
+ let saisitIdTicket=Number(prompt("Entre l identifiant du ticket:"));
+ let ticketIntrovable=false
+ for(let i=0; i<tickets.length;i++ ){
+    if(saisitIdTicket==tickets[i].id){
+        ticketIntrovable=true;
+        trips[tickets[i].tripId-1].availableSeats++;
+        tickets.splice(i,1);
+        console.log("Ticket annulé avec succès. ");
+    }
+ }
+ if(ticketIntrovable==false){
+    console.log("Ticket introuvable. ");
+ }
+
+}
 let choix;
 do{
     menuPrincipal();
@@ -287,6 +303,7 @@ do{
             afficherTickets();
           break;
          case '4':
+            annulerTicket();
           break;
          case '5':
           break;
