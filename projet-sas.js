@@ -227,7 +227,7 @@ function acheterTicket (){
             if(trips[i].availableSeats!==0){
                 console.log("Il reste des places disponibles.")
                 trips[i].availableSeats --;
-                let ticket={
+                const ticket={
                     id:++idUnique,
                     passengerName:nomPassager,
                     tripId:trips[i].id,
@@ -357,20 +357,23 @@ function statistiques(){
            console.log(`Chiffre d'affaires total:${sommer} DH `);
     console.log("========Trajet le plus vendu ========");
     let valeurMin=trips[0].availableSeats;
-    let valeurDep="";
-    let valeurAri="";
+    let valeurSommerTicket=0;
+    let valeurDep=trips[0].departure;
+    let valeurAri=trips[0].destination;
 
     for(let i=1;i<trips.length;i++){
-        if(valeurMin<trips[i].availableSeats){
-          valeurMin=trips[i].availableSeats;    
+        if(valeurMin>trips[i].availableSeats){
+          valeurMin=trips[i].availableSeats;   
            valeurDep=trips[i].departure;
            valeurAri=trips[i].destination;
+         
         }
         
     }
+    valeurSommerTicket=50-valeurMin;
     console.log("Trajet le plus vendu:");
     console.log(`${valeurDep}--->${valeurAri}`);
-    console.log(``);
+    console.log(`${valeurSommerTicket} tickets vendus`);
 
 
 }
