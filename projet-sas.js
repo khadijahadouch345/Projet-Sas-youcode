@@ -226,12 +226,40 @@ function acheterTicket (){
             
             if(trips[i].availableSeats!==0){
                 console.log("Il reste des places disponibles.")
-                trips[i].availableSeats --;
+
+                let seatNumber;
+                let used = []
+                for(let i = 0 ; i < tickets.length ; i++)
+                {
+                    if(identifiantTrajet === tickets[i].tripId)
+                    {
+                        used.push(tickets[i].seatNumber)
+                    }
+                }
+                for(let i = 1 ; i <= 50 ; i++)
+                {
+                    let found = false;
+                    for(let j = 0; j < used.length; j++)
+                    {
+                        if(used[j] === i)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(found == false)
+                    {
+                        seatNumber = i;
+                        break;
+                    }
+                }
+
+                trips[i].availableSeats--;
                 const ticket={
                     id:++idUnique,
                     passengerName:nomPassager,
                     tripId:trips[i].id,
-                    seatNumber:50 - trips[i].availableSeats ,
+                    seatNumber:seatNumber ,
                     price:trips[i].price
                 };
                 tickets.push(ticket);
@@ -284,7 +312,6 @@ function annulerTicket(){
  for(let i=0; i<tickets.length;i++ ){
     if(saisitIdTicket==tickets[i].id){
         ticketIntrovable=true;
-        // trips[tickets[i].tripId-1].availableSeats++;
         trips[i].availableSeats++
         tickets.splice(i,1);
         console.log("Ticket annulé avec succès. ");
