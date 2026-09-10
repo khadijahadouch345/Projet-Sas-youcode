@@ -356,9 +356,21 @@ function statistiques(){
            }
            console.log(`Chiffre d'affaires total:${sommer} DH `);
     console.log("========Trajet le plus vendu ========");
-    for(let i=0;i<trips.length;i++){
-        //if(trips[i].availableSeats>)
+    let valeurMin=trips[0].availableSeats;
+    let valeurDep="";
+    let valeurAri="";
+
+    for(let i=1;i<trips.length;i++){
+        if(valeurMin<trips[i].availableSeats){
+          valeurMin=trips[i].availableSeats;    
+           valeurDep=trips[i].departure;
+           valeurAri=trips[i].destination;
+        }
+        
     }
+    console.log("Trajet le plus vendu:");
+    console.log(`${valeurDep}--->${valeurAri}`);
+    console.log(``);
 
 
 }
