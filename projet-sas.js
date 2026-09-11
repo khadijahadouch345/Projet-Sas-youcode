@@ -387,7 +387,7 @@ if(trouveVille==false){
 }
 function trierTrajets(){
     let rest=0;
-    for(let i=0; i<trips.length;i++){
+    for(let i=1; i<trips.length;i++){
         for(let j=0;j<trips.length-1;j++){
             if(trips[j].price>trips[j+1].price){
             rest=trips[j];
@@ -433,6 +433,14 @@ function statistiques(){
 
 
 }
+
+acheterTicketTest('khadija',1);
+acheterTicketTest('hiba',3);
+acheterTicketTest('salma',5);
+acheterTicketTest('hafsa',1);
+acheterTicketTest('wiam',8);
+acheterTicketTest('khadija',9);
+
 let choix;
 do{
     menuPrincipal();
@@ -467,3 +475,90 @@ do{
      }
     
 }while(choix!=='0');
+
+
+// ajout automatique
+function acheterTicketTest(nomPassager,identifiantTrajet){
+ let trouvee=false
+ let tripIndex;
+for(let i=0;i<trips.length;i++){
+    if(trips[i].id==identifiantTrajet){
+         trouvee=true;
+         tripIndex=i;
+     }
+                          
+ }  
+    if(trouvee ===false){      
+           console.log("Trajet introuvable.");
+        }
+        else{
+           let result=false; 
+            for(let i=0;i<ticketAnnuler.length;i++){   
+               if(ticketAnnuler.length!=0 && ticketAnnuler[i].tripId===identifiantTrajet){  
+               result=true;
+                 break;
+              }
+            }
+  if(result){
+      let ticket;
+    // On récupère la place de l'ancien ticket annulé
+       for(let i=0;i<ticketAnnuler.length;i++){
+            if(ticketAnnuler[i].tripId==identifiantTrajet){  
+                 trips[tripIndex].availableSeats--;
+                 idUnique++;
+                 ticket={
+                 nomPassager: nomPassager,
+                 tripId: identifiantTrajet,
+                 id: idUnique,
+                 seatNumber: ticketAnnuler[i].seatNumber,
+                 price: ticketAnnuler[i].price};
+                //afficher le ticket ajouter 
+                 tickets.push(ticket);
+                 console.log(`Ticket achete avec succes`);
+                 ticketAnnuler.splice(i,1);
+                 
+                 break;
+            }
+       }
+        
+        }
+        else
+        {
+            if(trips[tripIndex].availableSeats>0){
+           
+ //changer le nombre de place de le trajets saisie
+    for(let i=0;i<trips.length;i++){
+        if(trips[i].id==identifiantTrajet){
+            trips[i].availableSeats--;
+            
+        }
+    }
+    // attribuer automatiquement un numéro de place 
+
+    let TotalSeats=0;
+    for(let i=0;i<tickets.length;i++){
+     if(tickets[i].tripId==identifiantTrajet){
+         TotalSeats+=1;   
+      }
+  }
+      // attribuer automatiquement un numéro de place 
+      seatNumber=TotalSeats+1; 
+      idUnique++;
+      //creer un ticket 
+       let prix=trips[tripIndex].price;
+      let ticket={
+            nomPassager: nomPassager,
+            tripId: identifiantTrajet,
+           id: idUnique,
+           seatNumber:  seatNumber,
+           price: prix};
+      //afficher le ticket ajouter 
+      tickets.push(ticket);
+      console.log(` Ticket acheté avec succès`);
+  }
+   else{
+       console.log("Train complet");
+   } }
+   
+     }
+}
