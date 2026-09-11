@@ -230,10 +230,8 @@ for(let i=0;i<trips.length;i++){
            console.log("Trajet introuvable.");
         }
         else{
-           let result=false;
-           
-            for(let i=0;i<ticketAnnuler.length;i++){
-                
+           let result=false; 
+            for(let i=0;i<ticketAnnuler.length;i++){   
                if(ticketAnnuler.length!=0 && ticketAnnuler[i].tripId===identifiantTrajet){  
                result=true;
                  break;
@@ -241,11 +239,9 @@ for(let i=0;i<trips.length;i++){
             }
   if(result){
       let ticket;
-      
     // On récupère la place de l'ancien ticket annulé
        for(let i=0;i<ticketAnnuler.length;i++){
-            if(ticketAnnuler[i].tripId==identifiantTrajet){
-                
+            if(ticketAnnuler[i].tripId==identifiantTrajet){  
                  trips[tripIndex].availableSeats--;
                  idUnique++;
                  ticket={
@@ -325,9 +321,9 @@ function afficherTickets(){
         console.log("Aucun ticket enregistré. ");
     }
     }
-    let ticketAnnuler=[];
+const  ticketAnnuler=[];
 function annulerTicket(){
- let saisitIdTicket=Number(prompt("Entre l identifiant du ticket:"));
+ let saisitIdTicket=Number(prompt("Entre l'identifiant du ticket:"));
  let ticketIntrovable=false
  let idTrip ;
  for(let i=0; i<tickets.length;i++ ){
